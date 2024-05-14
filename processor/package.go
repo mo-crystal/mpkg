@@ -19,3 +19,15 @@ func Search(commands []string) {
 		}
 	}
 }
+
+func Info(commands []string) {
+	if len(commands) < 1 {
+		utils.Exit("invalid arg")
+	}
+
+	for _, v := range pkg.Packages {
+		if v.Name == commands[0] {
+			v.PrintInfo()
+		}
+	}
+}

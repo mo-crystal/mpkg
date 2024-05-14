@@ -24,6 +24,8 @@ func main() {
 		processor.Version(commands[1:])
 	case "search":
 		processor.Search(commands[1:])
+	case "info":
+		processor.Info(commands[1:])
 	default:
 		utils.Exit("unknown command: " + commands[0])
 	}

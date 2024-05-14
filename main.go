@@ -10,6 +10,8 @@ import (
 
 func main() {
 	initialize.Server()
+	initialize.RootDir()
+
 	commands := flag.Args()
 
 	if len(commands) < 1 {

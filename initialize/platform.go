@@ -1,7 +1,6 @@
 package initialize
 
 import (
-	"fmt"
 	"os"
 	"os/user"
 
@@ -15,6 +14,4 @@ func RootDir() {
 	}
 
 	config.MocDir = u.HomeDir + string(os.PathSeparator) + "moc"
-
-	fmt.Println(config.MocDir)
 }

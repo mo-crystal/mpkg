@@ -22,6 +22,8 @@ func main() {
 	switch commands[0] {
 	case "version":
 		processor.Version(commands[1:])
+	case "search":
+		processor.Search(commands[1:])
 	default:
 		utils.Exit("unknown command: " + commands[0])
 	}

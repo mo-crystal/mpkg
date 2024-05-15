@@ -3,6 +3,7 @@ package initialize
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"os/user"
 	"runtime"
 
@@ -34,7 +35,7 @@ func Moc() {
 		} else {
 			C_INCLUDE_PATH += ";" + config.MocDir + string(os.PathSeparator) + "include"
 		}
-		err = os.Setenv("C_INCLUDE_PATH", C_INCLUDE_PATH)
+		err = exec.Command("setx /m C_INCLUDE_PATH", C_INCLUDE_PATH).Run()
 		if err != nil {
 			panic(err)
 		}
@@ -45,7 +46,7 @@ func Moc() {
 		} else {
 			CPLUS_INCLUDE_PATH += ";" + config.MocDir + string(os.PathSeparator) + "include"
 		}
-		err = os.Setenv("CPLUS_INCLUDE_PATH", CPLUS_INCLUDE_PATH)
+		err = exec.Command("setx /m CPLUS_INCLUDE_PATH", CPLUS_INCLUDE_PATH).Run()
 		if err != nil {
 			panic(err)
 		}
@@ -56,7 +57,7 @@ func Moc() {
 		} else {
 			LIBRARY_PATH += ";" + config.MocDir + string(os.PathSeparator) + "lib"
 		}
-		err = os.Setenv("LIBRARY_PATH", LIBRARY_PATH)
+		err = exec.Command("setx /m LIBRARY_PATH", LIBRARY_PATH).Run()
 		if err != nil {
 			panic(err)
 		}

@@ -3,6 +3,7 @@ package initialize
 import (
 	"encoding/json"
 	"flag"
+	"fmt"
 	"os"
 	"strings"
 
@@ -45,6 +46,7 @@ func Packages() {
 		return
 	}
 
+	fmt.Println("No local package cache. Getting from server...")
 	resp := utils.Get("/list")
 
 	pkgJson, err := json.Marshal(resp.Data)
@@ -75,5 +77,6 @@ func Packages() {
 		}
 	}
 
+	fmt.Printf("Got %d package(s) from server %s\n", len(pkg.Packages), config.Server)
 	toLocal()
 }

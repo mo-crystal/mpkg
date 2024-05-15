@@ -9,7 +9,7 @@ import (
 
 func Reset() {
 	fmt.Println("Removing all mpkg files...")
-	err := os.Remove(config.MocDir)
+	err := os.RemoveAll(config.MocDir)
 	if err != nil {
 		panic(err)
 	}

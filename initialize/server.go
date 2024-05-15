@@ -3,6 +3,7 @@ package initialize
 import (
 	"encoding/json"
 	"flag"
+	"os"
 	"strings"
 
 	"github.com/mo-crystal/mpkg/config"
@@ -16,7 +17,34 @@ func Server() {
 	config.Server = *server
 }
 
+func fromLocal() {
+	content, err := os.ReadFile(config.MocDir + string(os.PathSeparator) + "packages.json")
+	if err != nil {
+		panic(err)
+	}
+
+	err = json.Unmarshal(content, &pkg.Packages)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func toLocal() {
+	content, err := json.Marshal(pkg.Packages)
+	if err != nil {
+		panic(err)
+	}
+
+	os.WriteFile(config.MocDir+string(os.PathSeparator)+"packages.json", content, os.ModePerm)
+}
+
 func Packages() {
+	_, err := os.Stat(config.MocDir + string(os.PathSeparator) + "packages.json")
+	if err == nil {
+		fromLocal()
+		return
+	}
+
 	resp := utils.Get("/list")
 
 	pkgJson, err := json.Marshal(resp.Data)
@@ -46,4 +74,6 @@ func Packages() {
 			}
 		}
 	}
+
+	toLocal()
 }

@@ -10,10 +10,10 @@ import (
 
 func main() {
 	initialize.RootDir()
-	initialize.Moc()
-	initialize.Server()
 	initialize.IncludeDir()
 	initialize.LibDir()
+	initialize.Moc()
+	initialize.Server()
 	initialize.Packages()
 
 	commands := flag.Args()
@@ -31,6 +31,8 @@ func main() {
 		processor.Info(commands[1:])
 	case "reset":
 		processor.Reset()
+	case "update":
+		processor.Update()
 	default:
 		utils.Exit("unknown command: " + commands[0])
 	}

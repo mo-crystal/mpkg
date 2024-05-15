@@ -2,8 +2,11 @@ package processor
 
 import (
 	"fmt"
+	"os"
 	"strings"
 
+	"github.com/mo-crystal/mpkg/config"
+	"github.com/mo-crystal/mpkg/initialize"
 	"github.com/mo-crystal/mpkg/pkg"
 	"github.com/mo-crystal/mpkg/utils"
 )
@@ -30,4 +33,11 @@ func Info(commands []string) {
 			v.PrintInfo()
 		}
 	}
+}
+
+func Update() {
+	fmt.Println("Updating package cache...")
+	os.Remove(config.MocDir + string(os.PathSeparator) + "packages.json")
+	initialize.Packages()
+	fmt.Println("done")
 }

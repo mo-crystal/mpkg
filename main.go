@@ -11,6 +11,8 @@ import (
 func main() {
 	initialize.Server()
 	initialize.RootDir()
+	initialize.IncludeDir()
+	initialize.LibDir()
 	initialize.Packages()
 
 	commands := flag.Args()

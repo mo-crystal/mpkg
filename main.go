@@ -35,6 +35,8 @@ func main() {
 		processor.Update()
 	case "list":
 		processor.List()
+	case "install":
+		processor.Install(commands[1:])
 	default:
 		utils.Exit("unknown command: " + commands[0])
 	}

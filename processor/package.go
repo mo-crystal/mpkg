@@ -47,3 +47,13 @@ func List() {
 		fmt.Println(v.Name)
 	}
 }
+
+func Install(commands []string) {
+	for _, name := range commands {
+		for _, p := range pkg.Packages {
+			if name == p.Name {
+				p.InstallToEnv()
+			}
+		}
+	}
+}

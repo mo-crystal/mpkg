@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-	"runtime"
 	"strings"
 
 	"github.com/mo-crystal/mpkg/config"
+	"github.com/mo-crystal/mpkg/utils"
 )
 
 func runCommands(commands []string) {
@@ -66,32 +66,16 @@ func (p *Package) InstallToEnv() {
 
 	runCommands(p.Build)
 
-	cp := "cp"
-	if runtime.GOOS == "windows" {
-		cp = "copy"
-	}
-
-	mkdir := "mkdir"
-	if runtime.GOOS == "windows" {
-		mkdir = "md"
-	}
-
 	for _, headerFile := range p.Headers {
 		for _, includeDir := range config.IncludeDir {
-			if err := exec.Command(mkdir, includeDir+string(os.PathSeparator)+p.Name); err != nil {
-				panic(err)
-			}
-			if err := exec.Command(cp, headerFile, includeDir+string(os.PathSeparator)+p.Name+string(os.PathSeparator)); err != nil {
-				panic(err)
-			}
+			os.Mkdir(includeDir+string(os.PathSeparator)+p.Name, os.ModePerm)
+			utils.Copy(includeDir+string(os.PathSeparator)+p.Name+string(os.PathSeparator), headerFile)
 		}
 	}
 
 	for _, libFile := range p.Library {
 		for _, libDir := range config.LibDir {
-			if err := exec.Command(cp, libFile, libDir+string(os.PathSeparator)); err != nil {
-				panic(err)
-			}
+			utils.Copy(libDir+string(os.PathSeparator), libFile)
 		}
 	}
 }

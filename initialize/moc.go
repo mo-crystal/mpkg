@@ -34,7 +34,10 @@ func Moc() {
 		} else {
 			C_INCLUDE_PATH += ";" + config.MocDir + string(os.PathSeparator) + "include"
 		}
-		os.Setenv("C_INCLUDE_PATH", C_INCLUDE_PATH)
+		err = os.Setenv("C_INCLUDE_PATH", C_INCLUDE_PATH)
+		if err != nil {
+			panic(err)
+		}
 
 		CPLUS_INCLUDE_PATH := os.Getenv("CPLUS_INCLUDE_PATH")
 		if CPLUS_INCLUDE_PATH == "" {
@@ -42,7 +45,10 @@ func Moc() {
 		} else {
 			CPLUS_INCLUDE_PATH += ";" + config.MocDir + string(os.PathSeparator) + "include"
 		}
-		os.Setenv("CPLUS_INCLUDE_PATH", CPLUS_INCLUDE_PATH)
+		err = os.Setenv("CPLUS_INCLUDE_PATH", CPLUS_INCLUDE_PATH)
+		if err != nil {
+			panic(err)
+		}
 
 		LIBRARY_PATH := os.Getenv("LIBRARY_PATH")
 		if LIBRARY_PATH == "" {
@@ -50,6 +56,9 @@ func Moc() {
 		} else {
 			LIBRARY_PATH += ";" + config.MocDir + string(os.PathSeparator) + "lib"
 		}
-		os.Setenv("LIBRARY_PATH", LIBRARY_PATH)
+		err = os.Setenv("LIBRARY_PATH", LIBRARY_PATH)
+		if err != nil {
+			panic(err)
+		}
 	}
 }

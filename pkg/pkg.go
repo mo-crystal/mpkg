@@ -5,13 +5,15 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"strings"
 
 	"github.com/mo-crystal/mpkg/config"
 )
 
 func runCommands(commands []string) {
 	for _, v := range commands {
-		if err := exec.Command(v).Run(); err != nil {
+		args := strings.Split(v, " ")
+		if err := exec.Command(args[0], args[1:]...).Run(); err != nil {
 			panic(err)
 		}
 	}

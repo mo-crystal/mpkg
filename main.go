@@ -29,6 +29,8 @@ func main() {
 		processor.Search(commands[1:])
 	case "info":
 		processor.Info(commands[1:])
+	case "reset":
+		processor.Reset()
 	default:
 		utils.Exit("unknown command: " + commands[0])
 	}

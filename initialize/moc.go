@@ -23,6 +23,8 @@ func Moc() {
 	fmt.Println("Mpkg not initialized. Initializing...")
 	fmt.Println("Making mpkg dir..")
 	os.Mkdir(user.HomeDir+string(os.PathSeparator)+"moc", os.ModePerm)
+	os.Mkdir(user.HomeDir+string(os.PathSeparator)+"moc"+string(os.PathSeparator)+"include", os.ModePerm)
+	os.Mkdir(user.HomeDir+string(os.PathSeparator)+"moc"+string(os.PathSeparator)+"lib", os.ModePerm)
 	fmt.Println("ok")
 
 	if runtime.GOOS == "windows" {

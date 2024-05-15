@@ -9,8 +9,9 @@ import (
 )
 
 func main() {
-	initialize.Server()
 	initialize.RootDir()
+	initialize.Moc()
+	initialize.Server()
 	initialize.IncludeDir()
 	initialize.LibDir()
 	initialize.Packages()

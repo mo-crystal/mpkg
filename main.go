@@ -33,6 +33,8 @@ func main() {
 		processor.Reset()
 	case "update":
 		processor.Update()
+	case "list":
+		processor.List()
 	default:
 		utils.Exit("unknown command: " + commands[0])
 	}

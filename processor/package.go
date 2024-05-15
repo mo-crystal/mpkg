@@ -41,3 +41,9 @@ func Update() {
 	initialize.Packages()
 	fmt.Println("done")
 }
+
+func List() {
+	for _, v := range pkg.Packages {
+		fmt.Println(v.Name)
+	}
+}
